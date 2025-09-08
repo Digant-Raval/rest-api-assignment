@@ -20,10 +20,12 @@ It allows you to submit your student information (via **POST**) and retrieve it 
 - Python 3 (check with `python --version`)
 - [requests](https://pypi.org/project/requests/) library
 
+---
+
 📡 API Endpoint
 https://student-info-api.netlify.app/.netlify/functions/submit_student_info
 
-
+---
 👨‍💻 Author
 
 Digant Raval
