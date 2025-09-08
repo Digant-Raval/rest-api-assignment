@@ -22,11 +22,11 @@ It allows you to submit your student information (via **POST**) and retrieve it 
 
 ---
 
-📡 API Endpoint
+## 📡 API Endpoint
 https://student-info-api.netlify.app/.netlify/functions/submit_student_info
 
 ---
-👨‍💻 Author
+## 👨‍💻 Author
 
 Digant Raval
 
