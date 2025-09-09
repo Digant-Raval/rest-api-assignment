@@ -1,7 +1,6 @@
 import requests
 import json
 
-# API endpoint
 base_url = "https://student-info-api.netlify.app/.netlify/functions/submit_student_info"
 
 def collect_input(prompt, required=True):
@@ -23,7 +22,7 @@ def submit_info():
     favorite_cartoon = collect_input("Enter your favorite cartoon: ")
     favorite_language = collect_input("Enter your favorite programming language: ")
     movie_or_game_or_book = collect_input("Enter your favorite movie, game, or book: ")
-    section = "101"  # fixed as per assignment
+    section = "103"
 
     data = {
         "UCID": UCID,
@@ -74,17 +73,42 @@ def get_info():
     except Exception as e:
         print("⚠️ Error retrieving info:", e)
 
+def delete_info():
+    """Deletes a student record with DELETE"""
+    UCID = collect_input("Enter your UCID to delete: ")
+    section = collect_input("Enter the section where you submitted (e.g., 101 or 103): ")
+
+    url = f"{base_url}?UCID={UCID}&section={section}"
+
+    try:
+        response = requests.delete(url, timeout=10)
+        if response.status_code == 200:
+            print("✅ Record deleted successfully!")
+            print("Response:", response.json())
+        elif response.status_code == 404:
+            print("⚠️ Record not found. Double-check UCID and section.")
+        else:
+            print(f"❌ Server returned error {response.status_code}")
+            print("Details:", response.text)
+    except Exception as e:
+        print("⚠️ Error deleting info:", e)
 
 if __name__ == "__main__":
     print("Choose an option:")
     print("1. Submit my info (POST)")
     print("2. Get my info (GET)")
+    print("3. Delete my info (DELETE)")
 
-    choice = input("Enter 1 or 2: ").strip()
+    choice = input("Enter 1, 2, or 3: ").strip()
 
     if choice == "1":
         submit_info()
     elif choice == "2":
         get_info()
+    elif choice == "3":
+        delete_info()
     else:
         print("Invalid choice.")
+
+
+
